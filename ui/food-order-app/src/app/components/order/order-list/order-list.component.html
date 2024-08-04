@@ -1,0 +1,61 @@
+<body>
+    <section>
+        <div class="menu">
+            <h1>ПОРЪЧКИ</h1>
+        </div>
+        <div class="empty" *ngIf="orders.length <= 0">
+            <p>
+                Няма налични поръчки.
+            </p>
+        </div>
+
+        <ul class="ul-st" *ngIf="activeOrders.length > 0">
+            <h2 class="type-title">Активни поръчки</h2>
+            <li *ngFor="let order of activeOrders">
+                <div class="product-content">
+                    <p *ngIf="order.active" class="bold-red">В процес на приготвяне</p>
+                    <p>Дата на поръчката: {{ order.date | date:'dd/MM/yy' }}</p>
+                    <ul class="inner-list">
+                        <li *ngFor="let product of order.products">
+                            <p>{{ product.name }} </p>
+                            <p> - {{ product.price }} лв </p>
+                        </li>
+                    </ul>
+
+                    <p>Общо: {{ order.sum }} лв</p>
+                    <p>Потребител: {{ order.userData }}</p>
+                    <p>Адрес на поръчката: {{ order.address }}</p>
+                </div>
+                <div>
+                    <button *ngIf="isAdmin" [routerLink]="['/order/edit', order.id]"
+                        class="btn btn-cancel">Промени</button>
+                </div>
+            </li>
+        </ul>
+
+        <ul class="ul-st" *ngIf="deactiveOrders.length > 0">
+            <h2 class="type-title">Нективни поръчки</h2>
+            <li *ngFor="let order of deactiveOrders">
+                <div class="product-content">
+                    <p *ngIf="!order.active" [ngClass]="{'bold-green': !order.active}">Изпълнена</p>
+                    <p>Дата на поръчката: {{ order.date | date:'dd/MM/yy' }}</p>
+                    
+                    <ul class="inner-list">
+                        <li *ngFor="let product of order.products">
+                            <p>{{ product.name }} </p>
+                            <p> - {{ product.price }} лв </p>
+                        </li>
+                    </ul>
+                    <p>Общо: {{ order.sum }} лв</p>
+                    <p>Потребител: {{ order.userData }}</p>
+                    <p>Адрес на поръчката: {{ order.address }}</p>
+                </div>
+                <div>
+                    <button *ngIf="isAdmin" [routerLink]="['/order/edit', order.id]"
+                        class="btn btn-cancel">Промени</button>
+                </div>
+            </li>
+        </ul>
+
+    </section>
+</body>

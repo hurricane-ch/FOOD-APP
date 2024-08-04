@@ -1,0 +1,51 @@
+<div class="users">
+    <h1>Потребители</h1>
+
+    <div *ngIf="successMessage" class="alert alert-success">
+        {{ successMessage }} 
+    </div>
+
+    <div *ngIf="errorMessage" class="alert alert-danger">
+        {{ errorMessage }} 
+    </div>
+
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th class="text-center">Име</th>
+                    <th class="text-center">Имейл</th>
+                    <th class="text-center">Роли</th>
+                    <th class="text-center">Действие</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngIf="users">
+                    <tr *ngFor="let user of users">
+                        <td class="text-center">{{user.displayName}}</td>
+                        <td class="text-center">{{user.email}}</td>
+                        <td>
+                            <ng-container *ngFor="let role of roles | keyvalue">
+                                <div class="text-center">
+                                    <label>
+                                        <input (change)="onChangeRole(role.key, user)" type="checkbox" [value]="role.key" [checked]="user.rolesName?.includes(role.key)">
+                                        {{role.value}}
+                                    </label>
+                                </div>
+                            </ng-container>
+                        </td>
+                        <td class="text-center">
+                            <button (click)="updateUser(user)" [disabled]="requestInProgress" class="btn btn-primary">Обнови</button>
+                        </td>
+                    </tr>
+                </ng-container>
+                <ng-container *ngIf="!users">
+                    <tr>
+                        No users.
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+    </div>
+</div>

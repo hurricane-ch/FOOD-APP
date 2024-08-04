@@ -1,0 +1,109 @@
+<body>
+    <section class="address-line-and-fb-icon">
+        <article class="address">
+            <ul>
+                <li>
+                    <i class="fas fa-map-marker"></i>
+                </li>
+                <li>
+                    <p>гр.София, жк Манастирски ливади 10Б</p>
+                </li>
+            </ul>
+        </article>
+        <article class="log-menu">
+            <ul>
+                <li *ngIf="!isLoggedIn">
+                    <a routerLink="/user/login">Вход</a>
+                </li>
+                <li *ngIf="isLoggedIn">
+                    <a href="/" (click)="logout()">Изход</a>
+                </li>
+            </ul>
+        </article>
+    </section>
+
+    <section class="logo-and-info-line">
+        <a routerLink="/">
+            <img src="../assets/img/logo.png" alt="Logo" class="logo-img logo" />
+        </a>
+        <nav>
+            <ul>
+                <li>
+                    <article>
+                        <div class="restaurant-name">
+                            <p>Ресторант "Four Friends"</p>
+                        </div>
+                    </article>
+                </li>
+                <li>
+                    <article>
+                        <div class="contacts-icons">
+                            <i class="fas fa-mobile-alt fa-3x"></i>
+                        </div>
+                        <div class="contacts">
+                            <p>Телефон на ресторанта</p>
+                            <h4>0888 88 88 88</h4>
+                        </div>
+                    </article>
+                </li>
+                <li>
+                    <article>
+                        <div class="contacts-icons">
+                            <i class="far fa-clock fa-3x"></i>
+                        </div>
+                        <div class="contacts">
+                            <p>Работно време</p>
+                            <h4>Всеки ден от 08:00-22:00</h4>
+                        </div>
+                    </article>
+                    
+                </li>
+                <li>
+                    <article>
+                        <div *ngIf="isLoggedIn" class="contacts-icons">
+                            <i class="far fa-user fa-3x"></i>
+                        </div>
+                        <div *ngIf="isLoggedIn" class="currentUser">
+                            <p>Потребител</p>
+                            <div style="height: 15px;"></div>
+                            <h4>{{username}}</h4>
+                        </div>
+                    </article>
+                    
+                </li>
+            </ul>
+        </nav>
+    </section>
+
+    <section class="navigation">
+        <nav>
+            <ul>
+                <li *ngIf="isLoggedIn">
+                    <a routerLink="/menu"> МЕНЮ </a>
+                </li>
+                <li *ngIf="isAdmin && isLoggedIn">
+                    <a routerLink="/menu/add">ДОБАВИ ПРОДУКТ</a>
+                <li *ngIf="isLoggedIn && !isAdmin">
+                    <a routerLink="/order">КОШНИЦА</a>
+                </li>
+                <li *ngIf="isAdmin && isLoggedIn">
+                    <a routerLink="/order/all">ПОРЪЧКИ</a>
+                </li>
+                <li *ngIf="!isAdmin && isLoggedIn">
+                    <a routerLink="/order/all">ПОРЪЧКИ</a>
+                </li>
+                <li *ngIf="isAdmin && isLoggedIn">
+                    <a routerLink="/user/all">ПОТРЕБИТЕЛИ</a>
+                </li>
+                <li>
+                    <li *ngIf="isLoggedIn && !isAdmin">
+                    <a routerLink="/contacts">КОНТАКТИ</a>
+                </li>
+                <li>
+                    <li *ngIf="isLoggedIn">
+                    <a routerLink="/user/update">ПРОФИЛ</a>
+                </li>
+            </ul>
+        </nav>
+    </section>
+</body>
