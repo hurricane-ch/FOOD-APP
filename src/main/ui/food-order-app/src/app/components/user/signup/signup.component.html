@@ -1,0 +1,43 @@
+<body>
+  <div class="card card-container">
+    <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+      <div class="form-group">
+        <label for="displayName">Име</label> 
+        <input type="text" class="form-control" name="displayName" [(ngModel)]="form.displayName" required #displayName="ngModel" />
+        <div class="alert alert-danger" role="alert" *ngIf="f.submitted && displayName.invalid">Името е задължително!</div>
+      </div>
+      <div class="form-group">
+        <label for="email">Имейл</label> 
+        <input type="text" class="form-control" name="email" [(ngModel)]="form.email" required #email="ngModel" />
+        <div class="alert alert-danger" role="alert" *ngIf="f.submitted && email.invalid">Имейлът е задължителен!</div>
+        <div class="alert alert-danger" role="alert" *ngIf="errorMessage">{{ errorMessage }}</div>
+      </div>
+      <div class="form-group">
+        <label for="password">Парола</label>
+        <input type="password" class="form-control" name="password" [(ngModel)]="form.password" required minlength="5" #password="ngModel" />
+        <div class="alert alert-danger" role="alert" *ngIf="f.submitted && password.invalid">
+          <div *ngIf="password.errors.required">Паролата е задължителна!</div>
+          <div *ngIf="password.errors.minlength">Паролата, трябва да е поне 5 символа!</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="matchingPassword">Потвърди парола</label>
+        <input type="password" class="form-control" name="matchingPassword" [(ngModel)]="form.matchingPassword" required minlength="5" #matchingPassword="ngModel" />
+        <div class="alert alert-danger" role="alert" *ngIf="f.submitted && matchingPassword.invalid">
+          <div *ngIf="matchingPassword.errors.required">Потвърдената паролата е задължителна!</div>
+          <div *ngIf="matchingPassword.errors.minlength">Потвърдената парола, трябва да е поне 5 символа!</div>
+        </div>
+        <div class="alert alert-danger" role="alert" *ngIf="form.password !== form.matchingPassword && f.submitted">
+          Паролите не съвпадат!
+        </div>
+      </div>
+  
+      <!-- Success message -->
+      <div class="alert alert-success text-center font-weight-bold" role="alert" *ngIf="successMessage">{{ successMessage }}</div>
+  
+      <div class="form-group btn-position">
+        <button [hidden] = "showButton" class="btn btn-add">Регистрация</button>
+      </div>
+    </form>
+  </div>
+</body>

@@ -1,0 +1,49 @@
+<body>
+    <section>
+        <div class="menu">
+            <h1>ПРОМЕНИ ПОРЪЧКА</h1>
+        </div>
+
+        <div class="empty" *ngIf="isLoading">
+            <p>Зареждане...</p>
+        </div>
+
+        <form [formGroup]="form" (ngSubmit)="submitHandler()" *ngIf="!isLoading && order">
+            <div class="new-food-title">
+                <label for="date">Дата:</label>
+                <p>{{ order.date }}</p>
+            </div>
+
+            <div class="new-food-content">
+                <label for="status">Статус:</label>
+                <select id="status" formControlName="status">
+                    <option [ngValue]="true">В процес на приготвяне</option>
+                    <option [ngValue]="false">Изпълнена</option>
+                </select>
+            </div>
+
+            <div class="new-food-content">
+                <label for="products">Продукти:</label>
+                <ul class="inner-list">
+                    <li *ngFor="let product of order.products">
+                        <p>{{ product.name }}</p>
+                        <p>{{ product.price | currency:'BG':'symbol':'1.2-2' }} лв.</p>
+                    </li>
+                </ul>
+
+                <label for="sum">Обща цена:</label>
+                <p>{{ order.sum | currency:'BG':'symbol':'1.2-2' }} лв.</p>
+
+                <label for="userData">Данни на клиента:</label>
+                <p>{{ order.userData }}</p>
+
+                <label for="address">Адрес:</label>
+                <p>{{ order.address }}</p>
+            </div>
+
+            <div class="change-btn">
+                <button type="submit" class="btn btn-primary">Промени</button>
+            </div>
+        </form>
+    </section>
+</body>
