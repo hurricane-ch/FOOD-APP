@@ -20,10 +20,8 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 public class JwtRequestFilter extends OncePerRequestFilter {
 
-    @Autowired
     private TokenProvider tokenProvider;
 
-    @Autowired
     private LocalUserDetailServiceImpl customUserDetailsService;
 
     private static final Logger logger = LoggerFactory.getLogger(JwtRequestFilter.class);

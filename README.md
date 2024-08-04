@@ -8,16 +8,10 @@ The restaurant offers a varied menu of soups, salads, main dishes, desserts and 
 
 ### Frontend: 
 ```bash
+    go into ui folder
     npm install
-    ng serve 
-```    
-
-### Back-end
-Spring Boot, Spring Security
-
-localhost:8080
-
-1. ./mvnw clean package
+    npm start
+```
 
 ### Database
 MySQL
@@ -26,6 +20,10 @@ For linux execute:
 1.docker pull mysql:latest
 2.docker run --name mysql -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=foodorderapp -p 3306:3306 -d mysql:latest
 3.Make connection to database with user: root and password: root
+
+### Back-end
+1../mvnw clean package
+2.Start the app
 
 ### Admin for test
 
@@ -37,6 +35,6 @@ For linux execute:
 * password: 12345
 
 Or change default admin from:
-```java
- package com.foodorderapp.config;
-```
+
+src/main/java/com/foodorderapp/config/SetupDataLoader.java
+
