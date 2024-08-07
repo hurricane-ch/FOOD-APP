@@ -47,7 +47,6 @@ export class OrderEditComponent implements OnInit {
 
     this.redirectIfNotLoggedInOrAdmin();
     this.getOrderById();
-    this.isLoading = false;
   }
 
   submitHandler(): void {
@@ -62,7 +61,6 @@ export class OrderEditComponent implements OnInit {
         err => {
           this.message = err.message;
           console.error('ERROR -->> ', err.message);
-          this.getOrderById();
         },
         () => {
           this.isLoading = false;
@@ -83,13 +81,13 @@ export class OrderEditComponent implements OnInit {
       .subscribe(
         fetchedOrder => {
           this.order = fetchedOrder;
+          this.form.controls['status'].setValue(this.order.active); // Ensure form control is updated with the order's current status
+          this.isLoading = false;
         },
         err => {
           this.message = err.message;
           console.error('ERROR -->> ', err.message);
-        },
-        () => {
-          console.log('Order -->> ', this.order);
+          this.isLoading = false;
         }
       );
   }
