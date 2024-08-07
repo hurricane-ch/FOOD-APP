@@ -105,7 +105,7 @@ class OrderControllerTest extends BaseServiceTest {
     void editOrder() {
         OrderEditBindingModel orderEditBindingModel = new OrderEditBindingModel();
         orderEditBindingModel.setId("id");
-        orderEditBindingModel.setIsActive(false);
+        orderEditBindingModel.setActive(false);
         OrderServiceModel orderServiceModel = new OrderServiceModel();
 
         when(orderService.findById(orderEditBindingModel.getId())).thenReturn(Optional.of(orderServiceModel));

@@ -113,7 +113,7 @@ public class OrderController {
                     this.orderService.findById(orderEditBindingModel.getId());
 
             if (orderExist.isPresent()) {
-                orderExist.get().setActive(orderEditBindingModel.getIsActive());
+                orderExist.get().setActive(orderEditBindingModel.getActive());
 
                 OrderServiceModel orderServiceModel = this.modelMapper
                         .map(orderExist.get(), OrderServiceModel.class);

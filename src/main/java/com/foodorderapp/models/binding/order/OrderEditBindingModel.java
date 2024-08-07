@@ -20,5 +20,5 @@ public class OrderEditBindingModel {
     private String date;
     private BigDecimal sum;
     private String address;
-    private Boolean isActive;
+    private Boolean active;
 }
