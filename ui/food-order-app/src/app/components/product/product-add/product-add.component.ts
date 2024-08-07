@@ -80,7 +80,9 @@ export class ProductAddComponent implements OnInit {
     }
   
     this.productService.addProduct(product);
-    this.router.navigate([AppConstants.HOME_URL]);
+    this.router.navigate([AppConstants.HOME_URL]).then(() => {
+      window.location.reload();
+    });
   }
 
   public onFileChanged(event) {
