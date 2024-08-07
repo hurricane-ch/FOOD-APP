@@ -44,7 +44,7 @@
                     Цената трябва да е между 0.01 лв и 10 лв!
                 </p>
                 <label for="volume">Количество <span class="red">*</span></label>
-                <input formControlName="volume" type="number" name="volume" id="volume" required min="10">
+                <input formControlName="volume" type="number" name="volume" id="volume" required min="1">
             </div>
         </div>
 
@@ -57,7 +57,6 @@
 
         <div class="new-food-buttons">
             <button class="btn btn-add" [disabled]="form.invalid || form.errors">Добави</button>
-            <!-- <button class="btn btn-add">Добави</button> -->
             <button type="button" class="btn btn-cancel" routerLink="/">Откажи</button>
         </div>
     </form>

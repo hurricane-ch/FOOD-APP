@@ -66,9 +66,10 @@ export class OrderEditComponent implements OnInit {
         },
         () => {
           this.isLoading = false;
-          this.router.navigate([AppConstants.ORDER_ALL_URL]);
-        }
-      );
+          this.router.navigate([AppConstants.ORDER_ALL_URL]).then(() => {
+            window.location.reload();
+          });
+    });
   }
 
   private redirectIfNotLoggedInOrAdmin() {

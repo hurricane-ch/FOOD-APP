@@ -87,7 +87,7 @@
                     <a routerLink="/order">КОШНИЦА</a>
                 </li>
                 <li *ngIf="isAdmin && isLoggedIn">
-                    <a routerLink="/order/all">ПОРЪЧКИ</a>
+                    <a routerLink="/order/all">ПОРЪЧКИ ({{counter}})</a>
                 </li>
                 <li *ngIf="!isAdmin && isLoggedIn">
                     <a routerLink="/order/all">ПОРЪЧКИ</a>

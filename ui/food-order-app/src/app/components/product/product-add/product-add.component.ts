@@ -31,10 +31,9 @@ export class ProductAddComponent implements OnInit {
   form = new UntypedFormGroup({
     name: new UntypedFormControl('', [Validators.required, Validators.minLength(3)]),
     content: new UntypedFormControl('', [Validators.required, Validators.minLength(5)]),
-    volume: new UntypedFormControl('', [Validators.required]),
+    volume: new UntypedFormControl('', [Validators.required , Validators.min(1)]),
     foodType: new UntypedFormControl('', [Validators.required]),
-    price: new UntypedFormControl('', [Validators.required])
-  });
+    price: new UntypedFormControl('', [Validators.required, Validators.min(0.01),Validators.max(10) ]) });
 
   constructor(
     private productService: ProductService,
@@ -81,7 +80,7 @@ export class ProductAddComponent implements OnInit {
   
     this.productService.addProduct(product);
     this.router.navigate([AppConstants.HOME_URL]).then(() => {
-      window.location.reload();
+      window.location.reload(),this.imageService.getImage(product.name);
     });
   }
 
