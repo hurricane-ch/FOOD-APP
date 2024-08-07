@@ -67,16 +67,18 @@ export class ProductAddComponent implements OnInit {
 
   submitHandler(): void {
     let product = new Product();
-    debugger;
+
     product.name = this.form.controls['name'].value;
     product.content = this.form.controls['content'].value;
     product.volume = this.form.controls['volume'].value;
     product.price = this.form.controls['price'].value;
     product.type = this.form.controls['foodType'].value;
     //product.picture = this.selectedFile
-    debugger;
 
-    this.onUpload(product.name);
+    if (this.selectedFile) {
+      this.onUpload(product.name);
+    }
+  
     this.productService.addProduct(product);
     this.router.navigate([AppConstants.HOME_URL]);
   }
