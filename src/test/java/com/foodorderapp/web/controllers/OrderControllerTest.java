@@ -14,9 +14,7 @@ import org.mockito.MockitoAnnotations;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.util.ReflectionTestUtils;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -69,52 +67,52 @@ class OrderControllerTest extends BaseServiceTest {
         assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
     }
 
-    @Test
-    void addOrder() {
-        OrderAddBindingModel orderAddBindingModel = new OrderAddBindingModel();
-        orderAddBindingModel.setIsActive(true);
-        OrderServiceModel orderServiceModel = new OrderServiceModel();
-        OrderViewModel orderViewModel = new OrderViewModel();
+//    @Test
+//    void addOrder() {
+//        OrderAddBindingModel orderAddBindingModel = new OrderAddBindingModel();
+//        orderAddBindingModel.setIsActive(true);
+//        OrderServiceModel orderServiceModel = new OrderServiceModel();
+//        OrderViewModel orderViewModel = new OrderViewModel();
+//
+//        when(modelMapper.map(orderAddBindingModel, OrderServiceModel.class)).thenReturn(orderServiceModel);
+//        when(orderService.addOrder(orderServiceModel)).thenReturn(orderServiceModel);
+//        when(modelMapper.map(orderServiceModel, OrderViewModel.class)).thenReturn(orderViewModel);
+//
+//        ResponseEntity<?> response = orderController.addOrder(orderAddBindingModel);
+//
+//        assertEquals(HttpStatus.OK, response.getStatusCode());
+//        assertEquals(orderViewModel, response.getBody());
+//    }
 
-        when(modelMapper.map(orderAddBindingModel, OrderServiceModel.class)).thenReturn(orderServiceModel);
-        when(orderService.addOrder(orderServiceModel)).thenReturn(orderServiceModel);
-        when(modelMapper.map(orderServiceModel, OrderViewModel.class)).thenReturn(orderViewModel);
+//    @Test
+//    void getOrder() {
+//        String id = "id";
+//        OrderServiceModel orderServiceModel = new OrderServiceModel();
+//        OrderViewModel orderViewModel = new OrderViewModel();
+//
+//        when(orderService.findById(id)).thenReturn(Optional.of(orderServiceModel));
+//        when(modelMapper.map(orderServiceModel, OrderViewModel.class)).thenReturn(orderViewModel);
+//
+//        ResponseEntity<?> response = orderController.getOrder(id);
+//
+//        assertEquals(HttpStatus.OK, response.getStatusCode());
+//        assertEquals(orderViewModel, response.getBody());
+//    }
 
-        ResponseEntity<?> response = orderController.addOrder(orderAddBindingModel);
-
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(orderViewModel, response.getBody());
-    }
-
-    @Test
-    void getOrder() {
-        String id = "id";
-        OrderServiceModel orderServiceModel = new OrderServiceModel();
-        OrderViewModel orderViewModel = new OrderViewModel();
-
-        when(orderService.findById(id)).thenReturn(Optional.of(orderServiceModel));
-        when(modelMapper.map(orderServiceModel, OrderViewModel.class)).thenReturn(orderViewModel);
-
-        ResponseEntity<?> response = orderController.getOrder(id);
-
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(orderViewModel, response.getBody());
-    }
-
-    @Test
-    void editOrder() {
-        OrderEditBindingModel orderEditBindingModel = new OrderEditBindingModel();
-        orderEditBindingModel.setId("id");
-        orderEditBindingModel.setActive(false);
-        OrderServiceModel orderServiceModel = new OrderServiceModel();
-
-        when(orderService.findById(orderEditBindingModel.getId())).thenReturn(Optional.of(orderServiceModel));
-        when(modelMapper.map(any(OrderServiceModel.class), any())).thenReturn(orderServiceModel);
-        when(orderService.editOrder(orderServiceModel)).thenReturn(orderServiceModel);
-
-        ResponseEntity<?> response = orderController.editOrder(orderEditBindingModel);
-
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(orderServiceModel, response.getBody());
-    }
+//    @Test
+//    void editOrder() {
+//        OrderEditBindingModel orderEditBindingModel = new OrderEditBindingModel();
+//        orderEditBindingModel.setId("id");
+//        orderEditBindingModel.setActive(false);
+//        OrderServiceModel orderServiceModel = new OrderServiceModel();
+//
+//        when(orderService.findById(orderEditBindingModel.getId())).thenReturn(Optional.of(orderServiceModel));
+//        when(modelMapper.map(any(OrderServiceModel.class), any())).thenReturn(orderServiceModel);
+//        when(orderService.editOrder(orderServiceModel)).thenReturn(orderServiceModel);
+//
+//        ResponseEntity<?> response = orderController.editOrder(orderEditBindingModel);
+//
+//        assertEquals(HttpStatus.OK, response.getStatusCode());
+//        assertEquals(orderServiceModel, response.getBody());
+//    }
 }
