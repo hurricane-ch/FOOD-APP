@@ -37,6 +37,7 @@ public class UserController {
 
     @PutMapping(path = Links.USER_ROLE)
     public ResponseEntity<?> changeRole(@RequestBody UpdateRoles dto) {
+        userService.changeRole(dto);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
