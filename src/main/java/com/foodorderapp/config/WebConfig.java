@@ -29,10 +29,10 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(rateLimitingInterceptor)
-                .addPathPatterns("/user/login");
+                .addPathPatterns("/api/auth/signin");
 
         registry.addInterceptor(sizeLimitInterceptor)
-                .addPathPatterns("/image/add");
+                .addPathPatterns("/api/auth/image/add");
     }
 
     @Override

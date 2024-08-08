@@ -21,7 +21,6 @@ public class SizeLimitInterceptor implements HandlerInterceptor {
             MultipartFile file = multipartRequest.getFile("imageFile");
 
             if (file != null && file.getSize() > MAX_FILE_SIZE_BYTES) {
-                // File size exceeds limit, reject the request
                 response.sendError(HttpServletResponse.SC_REQUEST_ENTITY_TOO_LARGE,
                         "File size exceeds limit. Max allowed size is 100MB.");
                 return false;
