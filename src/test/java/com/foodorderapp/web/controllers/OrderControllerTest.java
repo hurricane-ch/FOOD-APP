@@ -1,7 +1,6 @@
 package com.foodorderapp.web.controllers;
 
 import com.foodorderapp.models.binding.order.OrderAddBindingModel;
-import com.foodorderapp.models.binding.order.OrderEditBindingModel;
 import com.foodorderapp.models.service.OrderServiceModel;
 import com.foodorderapp.models.view.OrderViewModel;
 import com.foodorderapp.services.impl.BaseServiceTest;
@@ -20,8 +19,10 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
+
 
 class OrderControllerTest extends BaseServiceTest {
 
@@ -67,52 +68,32 @@ class OrderControllerTest extends BaseServiceTest {
         assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
     }
 
-//    @Test
-//    void addOrder() {
-//        OrderAddBindingModel orderAddBindingModel = new OrderAddBindingModel();
-//        orderAddBindingModel.setIsActive(true);
-//        OrderServiceModel orderServiceModel = new OrderServiceModel();
-//        OrderViewModel orderViewModel = new OrderViewModel();
-//
-//        when(modelMapper.map(orderAddBindingModel, OrderServiceModel.class)).thenReturn(orderServiceModel);
-//        when(orderService.addOrder(orderServiceModel)).thenReturn(orderServiceModel);
-//        when(modelMapper.map(orderServiceModel, OrderViewModel.class)).thenReturn(orderViewModel);
-//
-//        ResponseEntity<?> response = orderController.addOrder(orderAddBindingModel);
-//
-//        assertEquals(HttpStatus.OK, response.getStatusCode());
-//        assertEquals(orderViewModel, response.getBody());
-//    }
+    @Test
+    void addOrder() {
+        OrderAddBindingModel orderAddBindingModel = new OrderAddBindingModel();
+        orderAddBindingModel.setIsActive(true);
+        OrderServiceModel orderServiceModel = new OrderServiceModel();
+        OrderViewModel orderViewModel = new OrderViewModel();
 
-//    @Test
-//    void getOrder() {
-//        String id = "id";
-//        OrderServiceModel orderServiceModel = new OrderServiceModel();
-//        OrderViewModel orderViewModel = new OrderViewModel();
-//
-//        when(orderService.findById(id)).thenReturn(Optional.of(orderServiceModel));
-//        when(modelMapper.map(orderServiceModel, OrderViewModel.class)).thenReturn(orderViewModel);
-//
-//        ResponseEntity<?> response = orderController.getOrder(id);
-//
-//        assertEquals(HttpStatus.OK, response.getStatusCode());
-//        assertEquals(orderViewModel, response.getBody());
-//    }
+        when(modelMapper.map(orderAddBindingModel, OrderServiceModel.class)).thenReturn(orderServiceModel);
+        when(orderService.addOrder(orderServiceModel)).thenReturn(orderServiceModel);
+        when(modelMapper.map(orderServiceModel, OrderViewModel.class)).thenReturn(orderViewModel);
 
-//    @Test
-//    void editOrder() {
-//        OrderEditBindingModel orderEditBindingModel = new OrderEditBindingModel();
-//        orderEditBindingModel.setId("id");
-//        orderEditBindingModel.setActive(false);
-//        OrderServiceModel orderServiceModel = new OrderServiceModel();
-//
-//        when(orderService.findById(orderEditBindingModel.getId())).thenReturn(Optional.of(orderServiceModel));
-//        when(modelMapper.map(any(OrderServiceModel.class), any())).thenReturn(orderServiceModel);
-//        when(orderService.editOrder(orderServiceModel)).thenReturn(orderServiceModel);
-//
-//        ResponseEntity<?> response = orderController.editOrder(orderEditBindingModel);
-//
-//        assertEquals(HttpStatus.OK, response.getStatusCode());
-//        assertEquals(orderServiceModel, response.getBody());
-//    }
+        ResponseEntity<?> response = orderController.addOrder(orderAddBindingModel);
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+    }
+
+    @Test
+    void getOrderNotFound() {
+        String id = "id";
+
+        when(orderService.findById(id)).thenReturn(Optional.empty());
+
+        ResponseEntity<?> response = orderController.getOrder(id);
+
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+        assertNull(response.getBody());
+    }
+
 }
