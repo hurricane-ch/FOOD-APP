@@ -22,7 +22,7 @@ For linux execute:
 3.Make connection to database with user: root and password: root
 
 ### Back-end
-1../mvnw clean package
+1../mvnw clean package (has to start container with mysql before compile) 
 2.Start the app
 
 ### Admin for test
