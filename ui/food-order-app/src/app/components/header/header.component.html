@@ -92,7 +92,7 @@
                 <li *ngIf="!isAdmin && isLoggedIn">
                     <a routerLink="/order/all">ПОРЪЧКИ</a>
                 </li>
-                <li *ngIf="isAdmin && isLoggedIn">
+                <li *ngIf="isAdmin && isLoggedIn && username==='Admin'">
                     <a routerLink="/user/all">ПОТРЕБИТЕЛИ</a>
                 </li>
                 <li>
