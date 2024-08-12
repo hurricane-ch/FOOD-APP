@@ -29,13 +29,13 @@ export class UserListComponent {
     this.userService.getUsers().subscribe((val: User[]) => this.users = val);
   }
 
-  onChangeRole(role: string, user: User) {
-    if (user.rolesName.includes(role)) {
-      user.rolesName = user.rolesName.filter(r => r !== role);
+  onChangeRole(selectedRole: string, user: any) {
+    if (user.rolesName.includes(selectedRole)) {
+        user.rolesName = [];
     } else {
-      user.rolesName.push(role);
+        user.rolesName = [selectedRole];
     }
-  }
+}
 
   updateUser(user: User) {
     this.requestInProgress = true;

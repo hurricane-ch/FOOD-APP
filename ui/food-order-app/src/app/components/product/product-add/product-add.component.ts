@@ -72,7 +72,6 @@ export class ProductAddComponent implements OnInit {
     product.volume = this.form.controls['volume'].value;
     product.price = this.form.controls['price'].value;
     product.type = this.form.controls['foodType'].value;
-    //product.picture = this.selectedFile
 
     if (this.selectedFile) {
       this.onUpload(product.name);
@@ -85,7 +84,6 @@ export class ProductAddComponent implements OnInit {
   }
 
   public onFileChanged(event) {
-    //Select File
     this.selectedFile = event.target.files[0];
   }
 
