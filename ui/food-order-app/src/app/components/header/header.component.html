@@ -88,7 +88,9 @@
                 </li>
                 <li *ngIf="isAdmin && isLoggedIn">
                     <a routerLink="/order/all">
-                        ПОРЪЧКИ <span class="counter">( {{counter}} )</span>
+                        ПОРЪЧКИ <span class="counter" [ngClass]="{'counter-white': counter === 0, 'counter-red': counter !== 0}">
+                            ( {{counter}} )
+                        </span>
                     </a>
                 </li>
                 <li *ngIf="!isAdmin && isLoggedIn">

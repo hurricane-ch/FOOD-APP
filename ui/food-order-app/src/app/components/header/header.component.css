@@ -222,8 +222,14 @@ body {
     margin-bottom: 18px;
   }
 
-  .counter {
+  .counter-white {
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.counter-red {
     color: red;
     font-size: 18px;
     font-weight: bold;
-  }
+}
