@@ -53,24 +53,32 @@ export class OrderAddComponent implements OnInit {
       this.isAdmin = this.roles.includes('ROLE_ADMIN');
       this.userData = user.displayName + ', ' + user.email;
     }
+
     this.products = this.orderService.products;
     this.calcFee();
   }
 
   calcFee() {
-    for (var product of this.products) {
-      this.fee = this.fee + product.price;
-    }
-
+    this.fee = this.products.reduce((total, product) => total + product.price, 0);
     this.isLoading = false;
   }
 
-  remove(product) {
-    let index = this.products.indexOf(product);
-    this.products.splice(index, 1);
+  remove(product: IProduct) {
+    const index = this.products.indexOf(product);
+    if (index > -1) {
+      this.products.splice(index, 1);
+      this.orderService.products = this.products;  // Update service
+      this.calcFee();  // Recalculate fee after removal
+    }
   }
 
   onSubmit() {
+    if (this.form.invalid || this.fee <= this.minPrice) {
+      // Trigger validation messages if the form is invalid or fee is not sufficient
+      this.form.markAllAsTouched();
+      return;
+    }
+
     let order = new Order();
     order.address = this.form.controls['address'].value;
     order.date = new Date().toLocaleDateString();
@@ -89,10 +97,7 @@ export class OrderAddComponent implements OnInit {
   }
 
   onCancel() {
-    for (let p of this.products) {
-      let index = this.products.indexOf(p);
-      this.products.splice(index, 1);
-    }
+    this.products = [];
     this.orderService.products = [];
     this.router.navigate([AppConstants.HOME_URL]);
   }

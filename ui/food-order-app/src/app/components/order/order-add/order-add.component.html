@@ -11,26 +11,27 @@
                     <button class="btn btn-cancel" (click)="remove(product)">Премахни</button>
                 </li>
             </ul>
+            <p class="error" *ngIf="fee <= minPrice">
+                Поръчката, трябва да е повече от {{ minPrice }} лв!
+            </p>
         </div>
     </div>
-
     <div *ngIf="products.length > 0" class="bill">
         <h2>Въведете адрес за доставка: *</h2>
         <div class="product-content">
             <form [formGroup]="form" (ngSubmit)="onSubmit()">
-                <textarea formControlName="address" type="text" name="content" id="content" rows="3" cols="40"
+                <textarea formControlName="address" rows="3" cols="40"
                     class="height" required placeholder="улица, блок, №, етаж...">
                 </textarea>
-                <p class="error" *ngIf="form.get('address').touched && form.get('address').errors?.required">
+                <p class="error" *ngIf="form.get('address').touched && form.get('address').hasError('required')">
                     Адресът е задължителен!
                 </p>
-
-
+                <p class="error" *ngIf="form.get('address').touched && form.get('address').hasError('minlength')">
+                    Адресът трябва да бъде поне 3 символа!
+                </p>
+    
                 <div class="btn-order">
-                    <p class="error" *ngIf="fee <= 5">
-                        Поръчката, трябва да е повече от 5 лв!
-                    </p>
-                    <button class="btn btn-add" [disabled]="isLoading || form.invalid || fee <= 5">
+                    <button class="btn btn-add" [disabled]="isLoading || form.invalid || fee <= minPrice">
                         Поръчай
                     </button>
                     <button class="btn btn-danger" (click)="onCancel()">Откажи</button>
