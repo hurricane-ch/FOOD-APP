@@ -41,6 +41,7 @@ export class ProfileComponent {
         this.showButton = true;
         this.errorMessage = '';
         setTimeout(() => {
+          this.authService.logout();
           this.router.navigate([AppConstants.HOME_URL])
         }, 3000);
       },
