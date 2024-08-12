@@ -1,31 +1,32 @@
 <body>
-    <div *ngIf="products.length > 0 && products != null " class="bill">
-        <h2>Сметка:  {{ fee }} лв</h2>
+    <div *ngIf="products.length > 0 && products != null" class="bill">
+        <h2>Сметка: {{ fee }} лв</h2>
         <div>
             <ul>
                 <li *ngFor="let product of products">
                     <div class="product-content">
                         <h3>{{ product.name }}</h3>
-                        <p>{{ product.price}} лв</p>
+                        <p>{{ product.price }} лв</p>
                     </div>
                     <button class="btn btn-cancel" (click)="remove(product)">Премахни</button>
                 </li>
             </ul>
             <p class="error" *ngIf="fee <= minPrice">
-                Поръчката, трябва да е повече от {{ minPrice }} лв!
+                Поръчката трябва да е повече от {{ minPrice }} лв!
             </p>
         </div>
     </div>
+
     <div *ngIf="products.length > 0" class="bill">
         <h2>Въведете адрес за доставка: *</h2>
         <div class="product-content">
             <form [formGroup]="form" (ngSubmit)="onSubmit()">
                 <textarea formControlName="address" rows="3" cols="40"
-                    class="height" required placeholder="улица, блок, №, етаж...">
-                </textarea>
-                <p class="error" *ngIf="form.get('address').touched && form.get('address').hasError('required')">
-                    Адресът е задължителен!
-                </p>
+                    class="height" placeholder="улица, блок, №, етаж..."></textarea>
+                
+                    <p class="error" *ngIf="form.get('address').touched && form.get('address').hasError('required')">
+                        Адресът е задължителен!
+                    </p>
                 <p class="error" *ngIf="form.get('address').touched && form.get('address').hasError('minlength')">
                     Адресът трябва да бъде поне 3 символа!
                 </p>
@@ -44,7 +45,7 @@
         <p>{{ message }}</p>
     </div>
 
-    <div *ngIf="products.length < 1 || products == null " class="no-products">
+    <div *ngIf="products.length < 1 || products == null" class="no-products">
         <p>Няма избрани продукти.</p>
     </div>
 </body>

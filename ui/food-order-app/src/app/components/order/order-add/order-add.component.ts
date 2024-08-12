@@ -33,7 +33,10 @@ export class OrderAddComponent implements OnInit {
   message = '';
 
   form = new UntypedFormGroup({
-    address: new UntypedFormControl('', [Validators.required, Validators.minLength(3)])
+    address: new UntypedFormControl('', [
+      Validators.required,
+      Validators.minLength(3)
+    ])
   });
 
   constructor(
@@ -56,6 +59,9 @@ export class OrderAddComponent implements OnInit {
 
     this.products = this.orderService.products;
     this.calcFee();
+
+    // Trigger initial validation to show the required message if needed
+    this.form.get('address').markAsTouched();
   }
 
   calcFee() {
