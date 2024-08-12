@@ -113,8 +113,6 @@ public class UserServiceImpl implements UserService {
 
         this.userRepository.save(user);
 
-        UserServiceModel userServiceModel = this.modelMapper.map(user, UserServiceModel.class);
-
         return this.modelMapper.map(user, UserServiceModel.class);
     }
 
