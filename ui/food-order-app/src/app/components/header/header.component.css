@@ -161,10 +161,7 @@ body {
       flex-direction: column;
     }
   }
-  
-  /* ---  Style the dropdown menu --- */
-  
-  /* Style The Dropdown Button */
+
   .dropbtn {
     background-color: #20c578;
     color: white;
@@ -174,13 +171,11 @@ body {
     cursor: pointer;
   }
   
-  /* The container <div> - needed to position the dropdown content */
   .dropdown {
     position: relative;
     display: inline-block;
   }
   
-  /* Dropdown Content (Hidden by Default) */
   .dropdown-content {
     display: none;
     position: absolute;
@@ -191,7 +186,6 @@ body {
     border-radius: 8px;
   }
   
-  /* Links inside the dropdown */
   .navigation ul li div.dropdown-content a {
     color: #94959a;
     padding: 12px 16px;
@@ -200,18 +194,15 @@ body {
     font-size: 15px;
   }
   
-  /* Change color of dropdown links on hover */
   .navigation ul li div.dropdown-content a:hover {
     background-color: #20c578;
     color: white;
   }
   
-  /* Show the dropdown menu on hover */
   .dropdown:hover .dropdown-content {
     display: block;
   }
   
-  /* Change the background color of the dropdown button when the dropdown content is shown */
   .dropdown:hover .dropbtn {
     cursor: pointer;
     color: #8f8f8f;
