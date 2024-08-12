@@ -230,3 +230,9 @@ body {
   .currentUser{
     margin-bottom: 18px;
   }
+
+  .counter {
+    color: red;
+    font-size: 18px;
+    font-weight: bold;
+  }

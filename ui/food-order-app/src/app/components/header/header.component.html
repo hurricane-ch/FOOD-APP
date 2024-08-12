@@ -53,7 +53,7 @@
                         </div>
                         <div class="contacts">
                             <p>Работно време</p>
-                            <h4>Всеки ден от 08:00-22:00</h4>
+                            <h4>Всеки ден от 08:00 - 22:00 часа</h4>
                         </div>
                     </article>
                     
@@ -87,7 +87,9 @@
                     <a routerLink="/order">КОШНИЦА</a>
                 </li>
                 <li *ngIf="isAdmin && isLoggedIn">
-                    <a routerLink="/order/all">ПОРЪЧКИ ({{counter}})</a>
+                    <a routerLink="/order/all">
+                        ПОРЪЧКИ <span class="counter">( {{counter}} )</span>
+                    </a>
                 </li>
                 <li *ngIf="!isAdmin && isLoggedIn">
                     <a routerLink="/order/all">ПОРЪЧКИ</a>
