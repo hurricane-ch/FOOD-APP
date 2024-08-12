@@ -12,5 +12,8 @@ public interface OrderRepository extends JpaRepository<Order, String> {
 
     List<Order> findAllByUserData(String userData);
 
-    List<Order> findByIsActiveFalseAndDate(LocalDate date);
+    List<Order> findAllByIsActiveFalseAndDate(String date);
+
+    List<Order> findAllByIsActiveFalse();
+
 }

@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -16,10 +18,10 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 class OrderCleanupSchedulerTest extends BaseServiceTest {
 
-    @Mock
+    @MockBean
     private OrderRepository orderRepository;
 
-    @InjectMocks
+    @Autowired
     private OrderCleanupScheduler orderCleanupScheduler;
 
     @BeforeEach
@@ -28,16 +30,16 @@ class OrderCleanupSchedulerTest extends BaseServiceTest {
     }
 
     @Test
-    void deleteInactiveOrdersFromYesterday() {
-        String yesterday = LocalDate.now().minusDays(1).toString(); // Assuming date is stored as "yyyy-MM-dd"
-        List<Order> mockOrdersToDelete = createMockOrders(yesterday);
+    void deleteInactiveOrders() {
+        String yesterday = LocalDate.now().minusDays(1).toString();
+        List<Order> mockOrdersToDelete = createMockOrders(yesterday);  // Assuming you have this helper method
 
-        when(orderRepository.findByIsActiveFalseAndDate(any()))
+        when(orderRepository.findAllByIsActiveFalse())
                 .thenReturn(mockOrdersToDelete);
 
-        orderCleanupScheduler.deleteInactiveOrdersFromYesterday();
+        orderCleanupScheduler.deleteInactiveOrders();
 
-        verify(orderRepository, times(1)).findByIsActiveFalseAndDate(any());
+        verify(orderRepository, times(1)).findAllByIsActiveFalse();
         verify(orderRepository, times(1)).deleteAll(mockOrdersToDelete);
     }
 

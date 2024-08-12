@@ -60,15 +60,15 @@ class OrderRepositoryTest extends BaseServiceTest {
         order1.setIsActive(false);
         orders.add(order1);
 
-        when(orderRepository.findByIsActiveFalseAndDate(date)).thenReturn(orders);
+        when(orderRepository.findAllByIsActiveFalseAndDate(date.toString())).thenReturn(orders);
 
-        List<Order> foundOrders = orderRepository.findByIsActiveFalseAndDate(date);
+        List<Order> foundOrders = orderRepository.findAllByIsActiveFalseAndDate(date.toString());
 
         assertNotNull(foundOrders);
         assertEquals(1, foundOrders.size());
         assertFalse(foundOrders.get(0).getIsActive());
         assertEquals(date.toString(), foundOrders.get(0).getDate());
 
-        verify(orderRepository, times(1)).findByIsActiveFalseAndDate(date);
+        verify(orderRepository, times(1)).findAllByIsActiveFalseAndDate(date.toString());
     }
 }
