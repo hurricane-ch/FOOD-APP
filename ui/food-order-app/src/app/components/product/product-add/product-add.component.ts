@@ -50,13 +50,18 @@ export class ProductAddComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
-
+  
     if (this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();
       this.roles = user.roles;
       this.isAdmin = this.roles.includes('ROLE_ADMIN');
       this.username = user.displayName;
     }
+  
+    // Mark all controls as touched on initialization
+    Object.keys(this.form.controls).forEach(control => {
+      this.form.controls[control].markAsTouched();
+    });
   }
   redirecting() {
     if (!this.isAdmin && !this.isLoggedIn) {
@@ -88,11 +93,8 @@ export class ProductAddComponent implements OnInit {
   }
 
   onUpload(name: string) {
-    console.log(this.selectedFile);
-    debugger;
     const uploadImageData = new FormData();
     uploadImageData.append('imageFile', this.selectedFile, name);
-
     this.imageService.uploadImage(uploadImageData);
   }
 

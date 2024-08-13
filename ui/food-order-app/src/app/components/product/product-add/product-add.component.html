@@ -6,24 +6,20 @@
         <div class="new-food-title">
             <label for="name">Име <span class="red">*</span></label>
             <input formControlName="name" type="text" name="name" id="name" required minlength="3">
-            <p class="error" *ngIf="form.get('name').touched && form.get('name').errors?.required">
-                Името е задължително!
-            </p>
-            <p class="error" *ngIf="form.get('name').touched && form.get('name').errors?.minlength">
-                Името, трябва да е поне 3 символа!
-            </p>
+            <p class="error" *ngIf="form.get('name').touched && form.get('name').invalid">
+                <span *ngIf="form.get('name').errors?.required">Името е задължително!</span>
+                <span *ngIf="form.get('name').errors?.minlength">Името, трябва да е поне 3 символа!</span>
+              </p>
         </div>
         <div class="new-food-content">
             <label for="content">Описание <span class="red">*</span></label>
             <textarea formControlName="content" type="text" name="content" id="content" rows="8" class="height" required
                 minlength="3">
             </textarea>
-            <p class="error" *ngIf="form.get('content').touched && form.get('content').errors?.required">
-                Съдържанието е задължително!
-            </p>
-            <p class="error" *ngIf="form.get('content').touched && form.get('content').errors?.required">
-                Съдържанието, трябва да е поне 3 симовла!
-            </p>
+            <p class="error" *ngIf="form.get('content').touched && form.get('content').invalid">
+                <span *ngIf="form.get('content').errors?.required">Съдържанието е задължително!</span>
+                <span *ngIf="form.get('content').errors?.minlength">Съдържанието трябва да е поне 5 символа!</span>
+              </p>
         </div>
 
         <div class="new-food-content">
@@ -34,17 +30,26 @@
                     {{foodType.value}}
                 </option>
             </select>
+            <p class="error" *ngIf="form.get('foodType').touched && form.get('foodType').invalid">
+                <span *ngIf="form.get('foodType').errors?.required">Типът на продукта е задължителен!</span>
+            </p>
         </div>
 
         <div class="price-volume">
             <div class="new-food-title">
                 <label for="price">Цена <span class="red">*</span></label>
                 <input formControlName="price" type="number" name="price" id="price" required min="0.01">
-                <p class="error" *ngIf="form.get('price').touched && form.get('price').errors?.required">
-                    Цената трябва да е между 0.01 лв и 10 лв!
+                <p class="error" *ngIf="form.get('price').touched && form.get('price').invalid">
+                    <span *ngIf="form.get('price').errors?.required">Цената е задължителна!</span>
+                    <span *ngIf="form.get('price').errors?.min">Цената трябва да е поне 0.01 лв!</span>
+                    <span *ngIf="form.get('price').errors?.max">Цената не може да надвишава 10 лв!</span>
                 </p>
                 <label for="volume">Количество <span class="red">*</span></label>
                 <input formControlName="volume" type="number" name="volume" id="volume" required min="1">
+                <p class="error" *ngIf="form.get('volume').touched && form.get('volume').invalid">
+                    <span *ngIf="form.get('volume').errors?.required">Количество е задължително!</span>
+                    <span *ngIf="form.get('volume').errors?.min">Количество трябва да е поне 1!</span>
+                </p>
             </div>
         </div>
 
