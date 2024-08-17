@@ -50,28 +50,25 @@ export class ProductAddComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
-  
+
     if (this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();
-      this.roles = user.roles;
-      this.isAdmin = this.roles.includes('ROLE_ADMIN');
-      this.username = user.displayName;
+      this.isAdmin = user.roles.includes('ROLE_ADMIN');
     }
   
-    // Mark all controls as touched on initialization
     Object.keys(this.form.controls).forEach(control => {
       this.form.controls[control].markAsTouched();
     });
   }
-  redirecting() {
+
+  redirecting(): void {
     if (!this.isAdmin && !this.isLoggedIn) {
       this.router.navigate([this.HOME]);
     }
   }
 
   submitHandler(): void {
-    let product = new Product();
-
+    const product = new Product();
     product.name = this.form.controls['name'].value;
     product.content = this.form.controls['content'].value;
     product.volume = this.form.controls['volume'].value;
@@ -81,21 +78,20 @@ export class ProductAddComponent implements OnInit {
     if (this.selectedFile) {
       this.onUpload(product.name);
     }
-  
+
     this.productService.addProduct(product);
-    this.router.navigate([AppConstants.HOME_URL]).then(() => {
-      window.location.reload(),this.imageService.getImage(product.name);
-    });
+
+    // Force reload of the page after adding the product
+    window.location.href = AppConstants.HOME_URL;
   }
 
-  public onFileChanged(event) {
+  onFileChanged(event): void {
     this.selectedFile = event.target.files[0];
   }
 
-  onUpload(name: string) {
+  onUpload(name: string): void {
     const uploadImageData = new FormData();
     uploadImageData.append('imageFile', this.selectedFile, name);
     this.imageService.uploadImage(uploadImageData);
   }
-
 }

@@ -97,8 +97,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void deleteById(String id) {
         Product product = this.productRepository.findById(id).orElse(null);
-
-        if (product != null && !imageRepository.findAll().isEmpty()){
+        if (product != null && !imageRepository.findAll().isEmpty() && product.getImage() != null){
             Image image = this.imageRepository.findByName(product.getName());
             this.imageRepository.delete(image);
         }

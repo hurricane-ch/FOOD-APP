@@ -117,7 +117,7 @@ export class ProductEditComponent implements OnInit {
       this.form.controls['type'].value != "") {
       this.product.type = this.form.controls['type'].value;
     }
-    //product.picture = this.selectedFile
+
     if (this.selectedFile != null &&
       this.selectedFile != undefined) {
       this.onUpload(this.product.name);
