@@ -81,7 +81,6 @@ export class ProductAddComponent implements OnInit {
 
     this.productService.addProduct(product);
 
-    // Force reload of the page after adding the product
     window.location.href = AppConstants.HOME_URL;
   }
 
